@@ -1,0 +1,655 @@
+:root {
+    --primary-green: #76B095;
+    --light-green: #E8F3ED;
+    --bg-gray: #F8F9FA;
+    --text-dark: #4A4A4A;
+    --text-muted: #8E8E8E;
+    --border-color: #EAEAEA;
+    --danger-red: #D32F2F;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #E2E8F0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* 模擬手機容器 */
+.phone-container {
+    width: 100vw;
+    max-width: 414px;
+    height: 100vh;
+    max-height: 896px;
+    background-color: #FFFFFF;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* 圖片頂部的綠色 Banner */
+.brand-banner {
+    background-color: var(--light-green);
+    padding: 30px 20px;
+    text-align: center;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.logo-icon {
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-green);
+    border-radius: 18px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 10px rgba(118, 176, 149, 0.2);
+    overflow: hidden;
+}
+
+/* 處理黑底白線 SVG 的專用樣式 */
+.logo-icon img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    mix-blend-mode: screen; 
+}
+
+.brand-title {
+    color: #538c75;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+    letter-spacing: 1px;
+}
+
+.brand-subtitle {
+    color: #7A8E85;
+    font-size: 14px;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+/* 表單內容區 */
+.form-content {
+    padding: 30px 30px;
+    flex: 1;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    color: var(--text-dark);
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper input, .input-wrapper textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 14px;
+    color: var(--text-dark); ;
+    background-color: #FFFFFF;
+    transition: all 0.2s ease;
+}
+
+.input-wrapper input:focus, .input-wrapper textarea:focus {
+    outline: none;
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 3px rgba(118, 176, 149, 0.15);
+}
+
+.input-wrapper input::placeholder {
+    color: #aaaaaa;          /* 輕盈的淺灰色 */
+    opacity: 1;              /* 確保 Firefox 瀏覽器不會把它調得太透明 */
+    font-weight: 400;        /* 讓字體細一點，看起來更像提示 */
+}
+
+/* 密碼可見切換小眼睛 */
+.password-toggle {
+    position: absolute;
+    right: 16px;
+    cursor: pointer;
+    color: var(--text-muted);
+    user-select: none;
+    font-size: 18px;
+}
+
+/* 角色選擇樣式 */
+.role-selector {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.role-btn {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.role-btn.active {
+    border-color: var(--primary-green);
+    color: var(--primary-green);
+    background-color: var(--light-green);
+}
+
+/* 按鈕樣式 */
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #76B095;
+    color: white;
+    border: 0;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.submit-btn:active {
+    background-color: #3a6b54;
+    color: white;
+    transform: scale(0.99);
+}
+
+/* 切換頁面連結 */
+.switch-mode {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 14px;
+    color: var(--text-dark);
+}
+
+.switch-mode span {
+    color: var(--primary-green);
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-left: 4px;
+}
+
+/* 內部頁面分頁切換 */
+.page { display: none; }
+.page.active { display: block; }
+
+.logout-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: transparent;
+    color: #D32F2F;
+    border: 1px solid #D32F2F;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 10px;
+}
+
+/* 通用頂部導覽列 */
+.recipient-navbar {
+    background-color: var(--light-green);
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.nav-logo-small {
+    width: 36px;
+    height: 36px;
+    background-color: var(--primary-green);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-logo-small img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    mix-blend-mode: screen;
+}
+
+/* 右側使用者狀態膠囊與下拉選單容器 */
+.user-status-container {
+    position: relative;
+}
+
+.user-capsule-btn {
+    background-color: #FFFFFF;
+    border: 1px solid #D1E5DB;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #4A4A4A;
+    cursor: pointer;
+    font-weight: 500;
+    user-select: none;
+    transition: background-color 0.2s;
+}
+
+.user-capsule-btn:hover {
+    background-color: #F8F9FA;
+}
+
+/* 隱藏的登出選單 */
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 34px;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 110px;
+    display: none;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.dropdown-item {
+    padding: 10px 16px;
+    font-size: 14px;
+    color: var(--danger-red);
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+}
+
+.dropdown-item:hover {
+    background-color: #FFF5F5;
+}
+
+/* 頁面標題 */
+.section-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #4A4A4A;
+    margin: 0px 0 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ==========================================================================
+   👤 領取者端：商品卡片外觀 (全新橫式：左側 GPS 儀表板 + 右側兩側對齊)
+   ========================================================================== */
+.product-list {
+    display: flex;
+    flex-direction: column;  /* 🌟 實現一排只能看一個商品 */
+    gap: 12px;
+    padding: 4px 0;
+}
+
+.product-card {
+    display: flex; 
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    background: white;
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 85px;
+}
+
+.product-card:active {
+    transform: scale(0.98);
+}
+
+/* 📍 左側圖片區域：GPS 距離儀表板 */
+.product-img-placeholder {
+    width: 95px;            /* 固定左側儀表板寬度 */
+    height: 100%;
+    flex-shrink: 0;
+    background-color: var(--light-green); /* 保留原本舒適的淡綠色 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px dashed rgba(118, 176, 149, 0.4); /* 文青風灰綠色虛線 */
+    gap: 3px;
+}
+
+/* 儀表板內文字微調 */
+.distance-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+.distance-value {
+    font-size: 20px;
+    font-weight: bold;
+    color: #538c75;
+}
+
+.distance-unit {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+/* 📝 右側文字區域：上下兩橫列 */
+.product-info {
+    padding: 12px 16px;
+    gap: 8px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* 核心關鍵：橫向兩側對齊列 */
+.p-row {
+    display: flex;
+    justify-content: space-between; /* 🌟 左邊靠左、右邊靠右 */
+    align-items: center;            /* 垂直置中 */
+    width: 100%;
+}
+
+/* 第一列左邊：提拉米蘇 */
+.p-name {
+    font-weight: bold;
+    font-size: 16px;
+    color: var(--text-dark);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;        /* 防止品名太長爆開 */
+    max-width: 180px;               /* 限制寬度，留空間給價格 */
+}
+
+/* 第一列右邊：$56 */
+.p-price {
+    color: #e60000;
+    font-weight: bold;
+    font-size: 17px;
+    flex-shrink: 0;
+}
+
+/* 第二列左邊：小花烘焙房 */
+.p-store {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;        /* 防止店家名太長爆開 */
+    max-width: 180px;
+}
+
+/* 第二列右邊：剩 2 個 */
+.p-qty {
+    font-size: 11px;
+    color: white;
+    background-color: var(--primary-green);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+/* 定位小視窗 (Modal) 樣式 */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    padding: 20px;
+}
+.location-modal {
+    background: white;
+    width: 90%;
+    max-width: 280px;
+    padding: 18px 16px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.geo-pulse-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--light-green);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 12px;
+    color: var(--primary-green);
+    animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(118,176,149,0.5); }
+    70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(118,176,149,0); }
+    100% { transform: scale(0.95); }
+}
+
+/* 內頁通用返回標頭 */
+.nav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+.nav-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--text-dark);
+    margin: 0;
+}
+.back-link {
+    color: var(--primary-green);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* 店家專用頂部按鈕排列 */
+.provider-action-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+.btn-add-surplus {
+    background-color: var(--primary-green);
+    color: white;
+    border: 0;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: background-color 0.2s;
+}
+.btn-add-surplus:active {
+    background-color: #5b9279;
+}
+
+/* =================================================
+   剩食詳情頁
+   ================================================= */
+.detail-card {
+    text-align: left;
+    background: var(--bg-gray);
+    padding: 24px;
+    border-radius: 12px
+}
+.detail-name {
+    margin: 0 0 6px 0;
+    color: var(--text-dark);
+}
+.detail-store {
+    margin: 0 0 6px 0;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+.detail-address {
+    font-size: 12px;
+    color: #538c75;
+    margin: 0;
+    font-weight: bold;
+}
+.detail-divider {
+    border: none;
+    border-top: 1px solid #EAEAEA;
+    margin-bottom: 12px;
+}
+.detail-desc {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+.detail-price-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    align-items: center;
+}
+.detail-price {
+    font-size: 22px;
+    color: #e60000;
+    font-weight: bold;
+}
+.detail-alert-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background-color: var(--light-green);
+    border-left: 4px solid var(--primary-green);
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
+.alert-text {
+    font-size: 12px;
+    color: #666666;
+    line-height: 1.5;
+}
+
+.alert-text strong {
+    color: #4A4A4A;
+}
+
+/* 提供者首頁 */
+.provider-list-title {
+    font-size: 15px;
+    margin: 10px 0 16px 0;
+    color: var(--text-dark);
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.provider-food-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* 唯讀欄位 */
+.input-readonly {
+    background-color: #f8f9fa !important;; 
+    color: #666 !important;;
+}
+
+/* 按鈕顏色變體 */
+.btn-orange {
+    background-color: #76B095;
+    color: white;
+}
+.btn-green {
+    background-color: var(--primary-green);
+    color: white;
+}
+
+/* 定位 Modal */
+.location-modal-title {
+    margin: 0 0 6px 0;
+    color: var(--text-dark);
+    font-size: 17px;
+}
+.location-modal-desc {
+    margin: 0 0 20px 0;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.provider-food-list .product-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    height: auto;
+}
+
+.provider-food-list .product-card > div:first-child {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--text-dark);
+    width: 30px;
+    text-align: center;
+}
+
+.provider-food-list .product-card > div:nth-child(2) {
+    flex: 1;
+    padding: 0 10px;
+}
+
+.provider-food-list .product-card span {
+    color: var(--primary-green);
+    font-size: 13px;
+    font-weight: bold;
+}

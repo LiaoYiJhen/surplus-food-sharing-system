@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>剩食共享系統</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="phone-container" id="app">
+
+    <!-- Banner -->
+    <div class="brand-banner" id="main-banner">
+        <div class="logo-icon">
+            <img src="images/logo.png" alt="系統標誌">
+        </div>
+        <h1 class="brand-title">剩食共享系統</h1>
+        <p class="brand-subtitle">減少浪費，共享美好</p>
+    </div>
+
+    <!-- Navbar -->
+    <div class="recipient-navbar" id="universal-nav" style="display:none;">
+        <div class="nav-logo-small">
+            <img src="images/logo.png" alt="系統標誌">
+        </div>
+        <div class="user-status-container">
+            <div class="user-capsule-btn" id="user-display-name">訪客，您好！</div>
+            <div class="dropdown-menu" id="user-dropdown">
+                <div class="dropdown-item" id="logout-btn">登出</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-content">
+
+        <!-- 登入 -->
+        <div id="page-login" class="page active">
+            <form id="login-form">
+                <div class="input-group">
+                    <label>帳號</label>
+                    <div class="input-wrapper">
+                        <input class="submit-input" id="login-account" placeholder="請輸入手機號碼" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>密碼</label>
+                    <div class="input-wrapper">
+                        <input class="submit-input" id="login-password" type="password" placeholder="請輸入密碼" required>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">登入</button>
+                <div class="switch-mode">
+                    還沒有帳號？<span id="go-register">立即註冊</span>
+                </div>
+            </form>
+        </div>
+
+        <!-- 註冊 -->
+        <div id="page-register" class="page">
+            <div class="role-selector">
+                <button type="button" id="btn-provider" class="role-btn active">我是提供者</button>
+                <button type="button" id="btn-recipient" class="role-btn">我是領取者</button>
+            </div>
+            <form id="register-form">
+                <div class="input-group">
+                    <label>帳號</label>
+                    <div class="input-wrapper">
+                        <input class="submit-input" id="reg-account" placeholder="請輸入手機號碼" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>密碼</label>
+                    <div class="input-wrapper">
+                        <input class="submit-input" id="reg-password" type="password" placeholder="請輸入密碼" required>
+                    </div>
+                </div>
+                <div id="provider-fields">
+                    <div class="input-group">
+                        <label>提供者名稱</label>
+                        <div class="input-wrapper">
+                            <input class="submit-input" id="reg-storeName" placeholder="請輸入姓名或店家名稱">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>地址（將作為領取地址）</label>
+                        <div class="input-wrapper">
+                            <input class="submit-input" id="reg-address" placeholder="請輸入詳細地址">
+                        </div>
+                    </div>
+                </div>
+                <div id="recipient-fields" style="display:none;">
+                    <div class="input-group">
+                        <label>姓名</label>
+                        <div class="input-wrapper">
+                            <input class="submit-input" id="reg-name" placeholder="請輸入姓名">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">送出註冊</button>
+                <div class="switch-mode">
+                    已有帳號？<span id="go-login">返回登入</span>
+                </div>
+            </form>
+        </div>
+
+        <!-- 提供者首頁 -->
+        <div id="page-provider-home" class="page">
+            <div class="provider-action-row">
+                <button id="go-add-food" class="btn-add-surplus">＋ 新增剩食</button>
+            </div>
+            <h3 class="provider-list-title">目前架上剩食</h3>
+            <div id="provider-food-list-container" class="provider-food-list"></div>
+        </div>
+
+        <!-- 新增剩食 -->
+        <div id="page-provider-add" class="page">
+            <div class="nav-header">
+                <span id="back-to-provider-home" class="back-link">← 取消</span>
+                <h2 class="nav-title">上架剩食商品</h2>
+            </div>
+            <form id="add-product-form">
+                <div class="input-group">
+                    <label>商品名稱</label>
+                    <div class="input-wrapper">
+                        <input class="submit-input" id="add-food-name" placeholder="例如：提拉米蘇切片">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>原價（TWD）</label>
+                    <div class="input-wrapper">
+                        <input class="submit-input" id="add-original-price" type="number" min="0"placeholder="例如：40" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>折扣（例如 0.8 代表八折）</label>
+                    <div class="input-wrapper">
+                        <input class="submit-input" id="add-discount" min="0" max="1" type="number" step="0.01" placeholder="例如：0.8" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>折扣後售價（自動計算）</label>
+                    <div class="input-wrapper">
+                        <input class="submit-input input-readonly" id="add-final-price" readonly>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>剩餘數量</label>
+                    <div class="input-wrapper">
+                        <input class="submit-input" id="add-quantity" type="number" min="0" placeholder="例如：5" required>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">發布上架</button>
+            </form>
+        </div>
+
+        <!-- 編輯剩食 -->
+        <div id="page-provider-update" class="page">
+            <div class="nav-header">
+                <span id="back-to-provider-home-2" class="back-link">← 返回</span>
+                <h2 class="nav-title">更新商品資訊</h2>
+            </div>
+            <form id="update-product-form">
+                <input type="hidden" id="up-id">
+                <div class="input-group">
+                    <label>商品名稱</label>
+                    <div class="input-wrapper">
+                        <input class="submit-input input-readonly" id="up-name" readonly>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>原價（TWD）</label>
+                    <div class="input-wrapper">
+                        <input class="submit-input input-readonly" id="up-price" readonly>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>折扣</label>
+                    <div class="input-wrapper">
+                        <input class="submit-input input-readonly" id="up-discount" readonly>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>折扣後售價</label>
+                    <div class="input-wrapper">
+                        <input class="submit-input input-readonly" id="up-final-price" readonly>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>剩餘數量</label>
+                    <div class="input-wrapper">
+                        <input class="submit-input" id="up-qty" type="number" min="0" required>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">儲存變更</button>
+            </form>
+        </div>
+
+        <!-- 領取者瀏覽 -->
+        <!-- useCase5 usecase6 剩食查詢頁面 -->
+        <div id="page-recipient-browse" class="page">
+            <div class="section-title">📍 附近剩食商品</div>
+            <div id="food-list-container" class="product-list">載入中...</div>
+        </div>
+
+        <!-- 領取者商品詳情 -->
+        <div id="page-recipient-detail" class="page">
+            <div class="nav-header">
+                <span id="back-to-browse" class="back-link">← 返回</span>
+                <h2 class="nav-title">商品詳情</h2>
+            </div>
+            <div class="detail-card">
+                <h3 id="detail-name" class="detail-name"></h3>
+                <p id="detail-store" class="detail-store"></p>
+                <p id="detail-address" class="detail-address"></p>
+                <hr class="detail-divider">
+                <div class="detail-price-row">
+                    <span id="detail-price" class="detail-price"></span>
+                    <span id="detail-qty" class="p-qty"></span>
+                </div>
+                <div id="detail-desc" class="detail-desc"></div>
+            </div>
+            <div id="detail-notice" style="margin-top:12px; background:#E8F3ED; border-left:4px solid #76B095; border-radius:6px; padding:12px 14px;">
+                <p style="margin:0; font-size:12px; color:#4A5D55;">
+                    <strong>溫馨提醒：</strong>剩食有效期限請洽店家，並於指定效期內儘速食用完畢。
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<!-- usecase6 步驟2：系統顯示GPS定位請求視窗 -->
+<div class="modal-overlay" id="location-modal-layer">
+    <div class="location-modal">
+        <div class="geo-pulse-icon">📍</div>
+        <h3 class="location-modal-title">正在獲取您的 GPS 定位</h3>
+        <p class="location-modal-desc">系統將自動篩選附近的店家剩食...</p>
+        <button id="close-location-modal" class="submit-btn">完成</button>
+    </div>
+</div>
+
+<script src="./ui.router.js"></script>
+<script src="./AuthController.js"></script>
+<script src="./ProviderController.js"></script>
+<script src="./RecipientController.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
