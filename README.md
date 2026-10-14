@@ -4,6 +4,10 @@
 透過數位平台媒合仍可食用的剩餘食物與有需求的使用者，
 讓即將被浪費的食物能在變質之前找到需要它的人。
 
+- 資料庫與後端實作： 使用 Node.js / Express 建構 RESTful API，搭配 PostgreSQL 關聯式資料庫設計會員與剩食資訊的資料表，並實作 JWT 身分驗證。
+- 地理位置數據處理： 整合 Browser Geolocation API 與 Google Maps Geocoding API，將文字地址轉換為經緯度座標，實現鄰近剩食的空間資料查詢與媒合。
+- 技術堆疊： Node.js, Express, PostgreSQL, RESTful API, Google Maps API, Render 部署。
+
 ## Project Motivation｜專案目的
 
 日常生活中，商家在營業結束前可能仍有未售完的食品，
